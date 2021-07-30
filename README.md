@@ -9,9 +9,11 @@
 | Method | URI                | Request Body | Response Body |
 |--------|--------------------|--------------|---------------|
 | GET    | `/api/dogs`      |              | Collection of representations of all_dog_resources
-| GET    | `/api/lemurs`      |              | Collection of representations of all _lemur_ resources
-| GET    | `/api/lemurs`      |              | Collection of representations of all _lemur_ resources
-| GET    | `/api/lemurs`      |              | Collection of representations of all _lemur_ resources
+| GET    | `/api/{id}`      |              | Collection of representations of all all_dog_resources resources
+| GET    | `/api/create`      |              | Collection of representations of all all_dog_resources resources
+| GET    | `/api/update`      |              | Collection of representations of all all_dog_resources resources
+| GET    | `/api/delete`      |              | Collection of representations of all all_dog_resources resources
+
 
 
 # Technologies Used
