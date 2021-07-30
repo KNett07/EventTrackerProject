@@ -8,7 +8,7 @@
 <!-- REQUIRED, DO THIS IN ADVANCE -->
 | Method | URI                | Request Body | Response Body |
 |--------|--------------------|--------------|---------------|
-| GET    | `/api/lemurs`      |              | Collection of representations of all _lemur_ resources
+| GET    | `/api/dogs`      |              | Collection of representations of all_dog_resources
 |--------|--------------------|--------------|---------------|
 | GET    | `/api/lemurs`      |              | Collection of representations of all _lemur_ resources
 |--------|--------------------|--------------|---------------|
