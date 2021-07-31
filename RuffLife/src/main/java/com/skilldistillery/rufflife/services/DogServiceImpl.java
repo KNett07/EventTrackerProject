@@ -21,4 +21,34 @@ public class DogServiceImpl implements DogService {
 		return repo.findAll();
 	}
 
+	
+//	by name
+	@Override
+	public List<Dog> searchByName(String name) {
+		
+		return repo.findDogByName(name);
+	}
+
+
+	
+//	create
+	@Override
+	public Dog addDog() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+//	update
+	
+//	delete
+	@Override
+	public boolean deleteDog(int id) {
+		
+		
+		return false;
+	}
+
+
+
 }
