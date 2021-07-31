@@ -46,5 +46,20 @@ class DogTest {
 		assertNotNull(dog);
 		assertEquals("Tuco", dog.getName());
 	}
+	@Test
+	void test_Dog_Toy_Mapping() {
+		assertNotNull(dog);
+		assertEquals("Squeaky Llama", dog.getFavToy());
+	}
+	@Test
+	void test_Dog_Treat_Mapping() {
+		assertNotNull(dog);
+		assertEquals("Peanut Butter", dog.getFavTreat());
+	}
+	@Test
+	void test_Dog_Vice_Mapping() {
+		assertNotNull(dog);
+		assertEquals("Scaredy Cat", dog.getVices());
+	}
 
 }
