@@ -2,6 +2,7 @@ package com.skilldistillery.rufflife.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,53 +21,63 @@ import com.skilldistillery.rufflife.services.DogService;
 @RestController
 @RequestMapping("api")
 public class DogController {
-	
+
 	@Autowired
 	private DogService serv;
-	
+
 	@GetMapping("dogs")
-	public List<Dog> listDogs(){
+	public List<Dog> listDogs() {
 		return serv.allDogs();
 	}
-	
+
 //	 /api/dogs/{name}
+	
 	@GetMapping("dogs/{name}")
-	public List<Dog> findDogByName(String name){
+	public List<Dog> findDogByName(String name) {
 		return serv.searchByName(name);
 	}
-	
-	
-	
+
 //	/api/create
+	
 	@PostMapping("create")
-	public Dog addDog(){
-		return serv.addDog();
+	public Dog addDog(@RequestBody Dog dog,HttpServletRequest req, HttpServletResponse res){
+		try {
+			serv.addDog(dog);
+			res.setStatus(201);
+}
+	catch(Exception e) {
+		res.setStatus(404);
+		dog = null;
 	}
 	
-	
-	
-//	/api/update/{id}
-	
-	@PutMapping("update/{id}")
-	public Dog updateDog(@RequestBody Dog dog, HttpServletResponse res){
-		if(dog == null) {
-			res.setStatus(404);
-		}
+	return dog;
 		
-		return dog;	
+	}
+	
+
+//	/api/update/{id}
+
+	@PutMapping("update/{id}")
+	public Dog updateDog(@RequestBody Dog dog, HttpServletResponse res) {
+		if (dog == null) {
+			res.setStatus(404);
+		}else {
+			serv.updateDog(dog);
 		}
-	
-	
+
+		return dog;
+	}
+
 //	 /api/delete/{id}
 
 	@DeleteMapping("delete/{id}")
-	public void deleteDog(@PathVariable int id, HttpServletResponse res){
+	public void deleteDog(@PathVariable int id, HttpServletResponse res) {
 		boolean deleted = serv.deleteDog(id);
 		if (deleted) {
 			res.setStatus(204);
 
-		}
-		else {
+		} else {
 			res.setStatus(404);
-		}	}
+		}
+	}
 }

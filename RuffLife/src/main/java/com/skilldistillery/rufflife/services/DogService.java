@@ -10,10 +10,12 @@ public interface DogService {
 	
 	List<Dog> searchByName(String name);
 	
-	Dog addDog();
+	Dog addDog(Dog dog);
 	
+	Dog updateDog(Dog dog);
 
 	boolean deleteDog(int id);
+
 
 
 

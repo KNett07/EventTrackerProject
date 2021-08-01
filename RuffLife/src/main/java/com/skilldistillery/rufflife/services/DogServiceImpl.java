@@ -23,6 +23,7 @@ public class DogServiceImpl implements DogService {
 
 	
 //	by name
+	
 	@Override
 	public List<Dog> searchByName(String name) {
 		
@@ -32,22 +33,56 @@ public class DogServiceImpl implements DogService {
 
 	
 //	create
+	
 	@Override
-	public Dog addDog() {
-		// TODO Auto-generated method stub
-		return null;
+	public Dog addDog(Dog dog) {
+		if (dog == null) {
+			
+			dog.setName(dog.getName());
+			dog.setFavToy(dog.getFavToy());
+			dog.setFavTreat(dog.getFavTreat());
+			dog.setFavPlace(dog.getFavPlace());
+			dog.setVices(dog.getVices());
+		}
+		
+		
+		return dog;
 	}
 	
 	
 //	update
 	
+	@Override
+	public Dog updateDog(Dog dog) {
+		
+if (dog.getId() > 0) {
+			dog.setName(dog.getName());
+			dog.setFavToy(dog.getFavToy());
+			dog.setFavTreat(dog.getFavTreat());
+			dog.setFavPlace(dog.getFavPlace());
+			dog.setVices(dog.getVices());
+		}
+		
+		
+		return dog;
+	}
+	
 //	delete
+	
 	@Override
 	public boolean deleteDog(int id) {
+		boolean deleted = false;
+		Dog deleteDog = repo.getById(id);
+		if(deleteDog.getId() > 0) {
+			repo.delete(deleteDog);
+			deleted = true;
+		}
+
 		
-		
-		return false;
+		return deleted;
 	}
+
+
 
 
 
