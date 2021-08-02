@@ -11,10 +11,10 @@ Currently, there is mapping for the functionality to list dogs in the database, 
 | Method | URI                | Request Body | Response Body |
 |--------|--------------------|--------------|---------------|
 | GET    | `/api/dogs`      |              | Collection of representations of all_dog_resources
-| GET    | `/api/dogs/{name}`      |              | Collection of representations of dog_resources_by_name
-| POST    | `/api/create`      |              | Add to the Collection of representations of all_dog_resources
-| PUT    | `/api/update/{id}`      |              | Update the Collection of all_dog_resources
-| DELETE    | `/api/delete/{id}`      |              | Remove an item from the Collection of all_dog_resources
+| GET    | `/api/dog/{name}`      |              | Collection of representations of dog_resources_by_name
+| POST    | `/api/dog`      |              | Add to the Collection of representations of all_dog_resources
+| PUT    | `/api/dog`      |              | Update the Collection of all_dog_resources
+| DELETE    | `/api/dog/{id}`      |              | Remove an item from the Collection of all_dog_resources
 
 
 

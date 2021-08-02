@@ -25,7 +25,7 @@ public class DogServiceImpl implements DogService {
 //	by name
 	
 	@Override
-	public List<Dog> searchByName(String name) {
+	public Dog searchByName(String name) {
 		
 		return repo.findDogByName(name);
 	}

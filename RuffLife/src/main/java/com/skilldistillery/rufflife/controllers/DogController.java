@@ -32,21 +32,23 @@ public class DogController {
 
 //	 /api/dogs/{name}
 	
-	@GetMapping("dogs/{name}")
-	public List<Dog> findDogByName(String name) {
-		return serv.searchByName(name);
+	@GetMapping("dog/{name}")
+	public Dog findDogByName(@PathVariable String name, HttpServletResponse res) {
+		Dog dog = serv.searchByName(name);
+		return dog;
 	}
 
 //	/api/create
 	
-	@PostMapping("create")
+	@PostMapping("dog")
 	public Dog addDog(@RequestBody Dog dog,HttpServletRequest req, HttpServletResponse res){
 		try {
-			serv.addDog(dog);
-			res.setStatus(201);
+			 dog = serv.addDog(dog);
+			res.setStatus(200);
+			return dog;
 }
 	catch(Exception e) {
-		res.setStatus(404);
+		res.setStatus(400);
 		dog = null;
 	}
 	
@@ -57,27 +59,41 @@ public class DogController {
 
 //	/api/update/{id}
 
-	@PutMapping("update/{id}")
+	@PutMapping("dog")
 	public Dog updateDog(@RequestBody Dog dog, HttpServletResponse res) {
-		if (dog == null) {
-			res.setStatus(404);
-		}else {
-			serv.updateDog(dog);
-		}
-
-		return dog;
+		
+		try {
+			 dog = serv.updateDog(dog);
+			res.setStatus(200);
+			return dog;
+}
+	catch(Exception e) {
+		res.setStatus(400);
+		dog = null;
+	}
+	
+	return dog;
+		
 	}
 
 //	 /api/delete/{id}
 
-	@DeleteMapping("delete/{id}")
-	public void deleteDog(@PathVariable int id, HttpServletResponse res) {
-		boolean deleted = serv.deleteDog(id);
-		if (deleted) {
-			res.setStatus(204);
+	@DeleteMapping("dog/{id}")
+	public String deleteDog(@PathVariable Integer id, HttpServletResponse res) {
+		
+		try {
+			boolean deleted = serv.deleteDog(id);
+			if (deleted) {
+				res.setStatus(204);
+				return "Deleted";
 
-		} else {
-			res.setStatus(404);
-		}
+			} else {
+				res.setStatus(404);
+				return "Not Found";
+			}
+		} catch (Exception e) {
+			res.setStatus(400);
+			return "Failed";
+		} 
 	}
 }
