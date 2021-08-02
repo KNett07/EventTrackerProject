@@ -1,6 +1,7 @@
 package com.skilldistillery.rufflife.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,6 @@ public class DogServiceImpl implements DogService {
 	@Override
 	public List<Dog> allDogs() {
 		
-		
 		return repo.findAll();
 	}
 
@@ -26,8 +26,9 @@ public class DogServiceImpl implements DogService {
 	
 	@Override
 	public Dog searchByName(String name) {
+		Optional<Dog> dog = repo.findDogByName(name);
 		
-		return repo.findDogByName(name);
+		return dog.get();
 	}
 
 
@@ -36,17 +37,7 @@ public class DogServiceImpl implements DogService {
 	
 	@Override
 	public Dog addDog(Dog dog) {
-		if (dog == null) {
-			
-			dog.setName(dog.getName());
-			dog.setFavToy(dog.getFavToy());
-			dog.setFavTreat(dog.getFavTreat());
-			dog.setFavPlace(dog.getFavPlace());
-			dog.setVices(dog.getVices());
-		}
-		
-		
-		return dog;
+		return repo.save(dog);
 	}
 	
 	
@@ -54,36 +45,20 @@ public class DogServiceImpl implements DogService {
 	
 	@Override
 	public Dog updateDog(Dog dog) {
+		return repo.save(dog);
 		
-if (dog.getId() > 0) {
-			dog.setName(dog.getName());
-			dog.setFavToy(dog.getFavToy());
-			dog.setFavTreat(dog.getFavTreat());
-			dog.setFavPlace(dog.getFavPlace());
-			dog.setVices(dog.getVices());
-		}
-		
-		
-		return dog;
 	}
 	
 //	delete
 	
 	@Override
 	public boolean deleteDog(int id) {
-		boolean deleted = false;
-		Dog deleteDog = repo.getById(id);
-		if(deleteDog.getId() > 0) {
-			repo.delete(deleteDog);
-			deleted = true;
-		}
-
+		try {
+		repo.deleteById(id);
+		return true;
+		} catch(Exception e) {
 		
-		return deleted;
+		return false;
+		}
+		}
 	}
-
-
-
-
-
-}
