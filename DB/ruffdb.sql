@@ -23,6 +23,10 @@ DROP TABLE IF EXISTS `dog` ;
 CREATE TABLE IF NOT EXISTS `dog` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
+  `fav_toy` VARCHAR(100) NULL,
+  `fav_treat` VARCHAR(100) NULL,
+  `fav_place` VARCHAR(200) NULL,
+  `vices` VARCHAR(1000) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -42,7 +46,10 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `ruffdb`;
-INSERT INTO `dog` (`id`, `name`) VALUES (1, 'Tuco');
+INSERT INTO `dog` (`id`, `name`, `fav_toy`, `fav_treat`, `fav_place`, `vices`) VALUES (1, 'Tuco', 'Squeaky Llama', 'Peanut Butter', 'Next To Momma', 'Scaredy Cat');
+INSERT INTO `dog` (`id`, `name`, `fav_toy`, `fav_treat`, `fav_place`, `vices`) VALUES (2, 'Linus', 'Fluffy Bunny', 'Veggies', 'Heating Pad', 'Meanstreak down his backbone a mile wide');
+INSERT INTO `dog` (`id`, `name`, `fav_toy`, `fav_treat`, `fav_place`, `vices`) VALUES (3, 'Rocket', 'Rope', 'Salmon', 'In the Wilderness', 'Will Follow you to the Bathroom');
+INSERT INTO `dog` (`id`, `name`, `fav_toy`, `fav_treat`, `fav_place`, `vices`) VALUES (4, 'Zara', 'Stick', 'Ice Cream', 'By The River', 'Everything in Life starts with a Lick');
 
 COMMIT;
 
