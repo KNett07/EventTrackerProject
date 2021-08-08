@@ -8,37 +8,132 @@ loadRuffLife();
 
   
 //   function init() {
-// 	document.dogForm.lookup.addEventListener('click', function(event) {
-// 	  event.preventDefault();
-// 	  var dogId = document.dogForm.dogId.value;
-// 	  if (!isNaN(dogId) && dogId > 0) {
-// 		getDog(dogId);
-// 	  }
-// 	});
-  
-//   document.newDogForm.addEventListener('click', function(e){
 	  
-// 	  e.preventDefault();
-// 	  let fm = document.newDogForm;
-// 	  let newDog = {
-// 		  name: fm.name.value,
-// 		  favToy: fm.favToy.value,
-// 		  favTreat: fm.favTreat.value,
-// 		  favPlace: fm.favPlace.value,
-// 		  vices: fm.vices.value
+	// document.dogForm.lookup.addEventListener('click', function(event) {
+	//   event.preventDefault();
+	//   var dogName = document.dogForm.dogName.value;
+	//   if (!isNaN(dogName) && dogName > 0) {
+	// 	getDog(dogName);
+	//   }
+	// });
+
+	// document.newDogForm.addEventListener('click', function(e){
+	  
+		// 	  e.preventDefault();
+		// 	  let fm = document.newDogForm;
+		// 	  let newDog = {
+		// 		  name: fm.name.value,
+		// 		  favToy: fm.favToy.value,
+		// 		  favTreat: fm.favTreat.value,
+		// 		  favPlace: fm.favPlace.value,
+		// 		  vices: fm.vices.value
+				  
+				  
+		// 	  };
+		// 	  addDog(newDog);
+		
+		// }
+		//   });
+		//   }
+
+// }
+
+function getDog(dogName) {
+
+	var xhr = new XMLHttpRequest();
+	xhr.open('GET', 'api/dog/' + dogName);
+		
+	xhr.onreadystatechange = function() {
+	  if (xhr.readyState === 4 ) {
+		if ( xhr.status == 200) { // Ok or Created
+		  var newDog = JSON.parse(xhr.responseText);
+		
+			displayOneDog(newDog);
+		}
+		else {
+			displayError("Dog not Found");
 		  
-		  
-// 	  };
-// 	  addDog(newDog);
-	  
-	  
-//   })
-//   }
+		}
+	  }
+	};
+	xhr.send();
+	
+}
+
+function displayError(msg){
+	var dogDiv = document.getElementById('dogData');
+	dogDiv.textContent = msg;
+}
+
+function displayOneDog(newDog){
+
+	var dogDiv = document.getElementById('dogData');
+  dogDiv.textContent = '';
+
+let name = document.createElement('h1');
+name.textContent = newDog.name;
+dogDiv.appendChild(name);
+
+let ul = document.createElement('ul');
+
+let favToy = document.createElement('li');
+favToy.textContent = newDog.favToy;
+ul.appendChild(favToy);
+// dogDiv.appendChild(favToy)
+
+let favTreat = document.createElement('li');
+favTreat.textContent = newDog.favTreat;
+ul.appendChild(favTreat);
+// dogDiv.appendChild(favTreat)
+
+let favPlace = document.createElement('li');
+favPlace.textContent = newDog.favPlace;
+ul.appendChild(favPlace);
+// dogDiv.appendChild(favPlace);
+
+ let vices = document.createElement('li');
+ vices.textContent = newDog.vices;
+ul.appendChild(vices);
+dogDiv.appendChild(ul);
+
+// updateDog();
+// THEN deleteDogData();
+
+
+}
+
 
 
 
 
 function loadRuffLife(){
+
+	document.dogForm.lookup.addEventListener('click', function(event) {
+		event.preventDefault();
+		var dogName = document.dogForm.dogName.value;
+		if (!isNaN(dogName) && dogName > 0) {
+		  getDog(dogName);
+		}
+	  });
+  
+	  document.newDogForm.addDog.addEventListener('click', function(e){
+		
+		  	  e.preventDefault();
+		  	  let fm = document.newDogForm;
+		  	  let newDog = {
+		  		  name: fm.name.value,
+		  		  favToy: fm.favToy.value,
+		  		  favTreat: fm.favTreat.value,
+		  		  favPlace: fm.favPlace.value,
+		  		  vices: fm.vices.value
+					
+					
+		  	  };
+		  	  addDog(newDog);
+		  
+		  });
+		    
+  
 
 	let xhr = new XMLHttpRequest();
 
@@ -113,83 +208,26 @@ function displayDogs(dogs){
 	}
 
 }
-// SINGLE RETRIEVE
-
-function getDog(dogName) {
-
-	var xhr = new XMLHttpRequest();
-	xhr.open('GET', 'api/dog/' + dogName);
-	
-	xhr.setRequestHeader("Content-type", "application/json"); // Specify JSON request body
-	
-	xhr.onreadystatechange = function() {
-	  if (xhr.readyState === 4 ) {
-		if ( xhr.status == 200 || xhr.status == 201 ) { // Ok or Created
-		  var dog = JSON.parse(xhr.responseText);
-		
-		  console.log(dog);
-			displayOneDog(dog);
-		}
-		else {
-		  console.log("Dog not Found.");
-		  console.error(xhr.status + ': ' + xhr.responseText);
-		}
-	  }
-	};
-	xhr.send();
-	
-}
-
-function displayOneDog(dog){
-
-	var dogDiv = document.getElementById('dogData');
-  dogDiv.textContent = '';
-
-let h1 = document.createElement('h1');
-h1.textContent = dog.name;
-
-dataDiv.appendChild(h1);
-
-let bq = document.createElement('blockquote');
-bq.textContent = dog.favToy;
-dataDiv.appendChild(bq)
-
-let ul = document.createElement('ul');
-let li = document.createElement('li');
-li.textContent = dog.favTreat;
-ul.appendChild(li);
-dogDiv.appendChild(li)
- li = document.createElement('li');
-li.textContent = dog.favPlace;
-ul.appendChild(li);
-dogDiv.appendChild(li);
- li = document.createElement('li');
-li.textContent = dog.vices;
-ul.appendChild(li);
-dogDiv.appendChild(li);
 
 	
 // CREATE
 function addDog(newDog){
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', 'api/dog');
-	
-	xhr.setRequestHeader("Content-type", "application/json"); // Specify JSON request body
-	
+		
 	xhr.onreadystatechange = function() {
 	  if (xhr.readyState === 4 ) {
 		if ( xhr.status == 200 ) { // Ok or Created
 		  var newDog = JSON.parse(xhr.responseText);
-		  console.log(newDog);
-	displayDogs(newDog);
+		  	displayOneDog(newDog);
 		}
 		else {
-		  console.log("Dog not created.");
-		  console.error(xhr.status + ': ' + xhr.responseText);
+		  displayError("Dog not created." + xhr.status);
 		}
 	  }
 	};
-	
+		xhr.setRequestHeader("Content-type", "application/json"); // Specify JSON request body
+
 	let dogJson = JSON.stringify(newDog);
 	xhr.send(dogJson);
 			
@@ -228,4 +266,4 @@ function addDog(newDog){
 	
 			
 // 		}
-		}
+		// }
