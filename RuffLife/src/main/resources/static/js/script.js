@@ -56,9 +56,41 @@ function getDog(dogName) {
 		}
 	  }
 	};
-	xhr.send();
+	// xhr.send();
+	xhr.setRequestHeader("Content-type", "application/json"); // Specify JSON request body
+
+	let dogJson = JSON.stringify(newDog);
+	xhr.send(dogJson);
+	
 	
 }
+
+
+// var xhr = new XMLHttpRequest();
+// 	xhr.open('POST', 'api/dog');
+		
+// 	xhr.onreadystatechange = function() {
+// 	  if (xhr.readyState === 4 ) {
+// 		if ( xhr.status == 200 ) { // Ok or Created
+// 		  var newDog = JSON.parse(xhr.responseText);
+// 		  	displayOneDog(newDog);
+// 		}
+// 		else {
+// 		  displayError("Dog not created." + xhr.status);
+// 		}
+// 	  }
+// 	};
+// 		xhr.setRequestHeader("Content-type", "application/json"); // Specify JSON request body
+
+// 	let dogJson = JSON.stringify(newDog);
+// 	xhr.send(dogJson);
+			
+			
+// 		}
+
+
+
+
 
 function displayError(msg){
 	var dogDiv = document.getElementById('dogData');
@@ -111,7 +143,7 @@ function loadRuffLife(){
 	document.dogForm.lookup.addEventListener('click', function(event) {
 		event.preventDefault();
 		var dogName = document.dogForm.dogName.value;
-		if (!isNaN(dogName) && dogName > 0) {
+		if (!isNaN(dogName)) {
 		  getDog(dogName);
 		}
 	  });
