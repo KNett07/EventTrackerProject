@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.skilldistillery.rufflife.entities.Dog;
 import com.skilldistillery.rufflife.services.DogService;
 
+@CrossOrigin({"*", "http://localhost:4204"})
 @RestController
 @RequestMapping("api")
 public class DogController {
@@ -40,7 +42,7 @@ public class DogController {
 
 //	/api/create
 	
-	@PostMapping("dog")
+	@PostMapping("dogs")
 	public Dog addDog(@RequestBody Dog dog,HttpServletRequest req, HttpServletResponse res){
 		try {
 			 dog = serv.addDog(dog);
@@ -59,7 +61,7 @@ public class DogController {
 
 //	/api/update/{id}
 
-	@PutMapping("dog")
+	@PutMapping("dogs/{id}")
 	public Dog updateDog(@RequestBody Dog dog, HttpServletResponse res) {
 		
 		try {
@@ -78,7 +80,7 @@ public class DogController {
 
 //	 /api/delete/{id}
 
-	@DeleteMapping("dog/{id}")
+	@DeleteMapping("dogs/{id}")
 	public String deleteDog(@PathVariable Integer id, HttpServletResponse res) {
 		
 		try {

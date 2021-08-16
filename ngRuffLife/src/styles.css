@@ -1,0 +1,42 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+
+input {
+  color:rgb(150, 66, 186);
+  display: block;
+  text-align: center;
+  width: 300px;
+  height: 30px;
+  margin-left: 30px;;
+}
+
+label {
+  color:cadetblue;
+  margin-left: 100px;
+
+}
+
+h1{
+  color: darkcyan;
+  text-align: center;
+}
+h2{
+  color: darkcyan;
+  text-align: center;
+}
+
+table{
+  table-layout:inherit;
+margin-left: 30px;
+}
+
+p{
+  margin-left: 30px;
+  font-size: 20px;
+  font-style: italic;
+
+}
+
+
+
+
