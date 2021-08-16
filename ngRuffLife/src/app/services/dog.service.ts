@@ -3,14 +3,15 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { Dog } from '../models/dog';
 import {catchError} from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DogService {
 
-  baseUrl = 'http://localhost:8084/';
-  url = this.baseUrl + 'api/dogs';
+  // baseUrl = 'http://localhost:8084/';
+  url = environment.baseUrl + 'api/dogs';
 
   constructor(
     private http: HttpClient
